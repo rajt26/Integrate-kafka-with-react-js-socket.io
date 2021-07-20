@@ -4,16 +4,19 @@ import { Card } from "antd";
 import { PostAction } from "../../action/post.action";
 import { useDispatch, useSelector } from "react-redux";
 import Header from '../../component/Header/header'
+import {uniqBy} from 'lodash';
+
 
 
 const Posts = () => {
   const history = useHistory();
-  const posts = useSelector((state) => state.posts);
+  let posts = useSelector((state) => state.posts);
   const dispatch = useDispatch();
 
   console.log("====================================");
   console.log("posts state---", posts);
   console.log("====================================");
+  posts = uniqBy(posts, '_id')
 
   useEffect(async () => {
     dispatch(await PostAction.getPosts());
