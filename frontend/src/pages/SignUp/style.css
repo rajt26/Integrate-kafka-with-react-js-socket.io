@@ -1,0 +1,15 @@
+.sign_up {
+    max-width: 300px;
+    margin-left: 500px;
+    margin-top: 200px;
+  }
+  .login-form-forgot {
+    float: right;
+  }
+  .ant-col-rtl .login-form-forgot {
+    float: left;
+  }
+  .signup-form-button {
+    width: 50%;
+    margin-left: 100px;
+  }
