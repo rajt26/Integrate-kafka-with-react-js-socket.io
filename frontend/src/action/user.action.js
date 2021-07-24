@@ -9,9 +9,12 @@ const login = (data) => {
            payload:user.data.data
        }
    }).catch((err) => {
+       console.log('====================================');
+       console.log(err);
+       console.log('====================================');
         return {
             type:ERROR,
-            payload:err.response.data
+            payload:err
         }
    })
 }

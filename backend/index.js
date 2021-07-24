@@ -18,36 +18,22 @@ app.use(express.json())
 
 
 const server = http.createServer(app)
-// const io = require('socket.io')(server,{
-//   cors: {
-//   origin: "http://localhost:3001",
-//   methods: ["GET", "POST"]
-// }
-// })
 
-
-// io.on("connection",(socket) => {
-//   console.log("User Connected",socket.id);
-
-//   socket.on("disconnect",() => {
-//           console.log("Client disconnected");
-//       })
-// })
-
-// app.use((req,res,next) => {
-//   req.io = io
-//   next()
-// })
-//user
+//user routes
 app.post("/user/create",UserController.create);
 app.post("/user/find",verifyToken,UserController.find);
 app.post("/user/update",verifyToken,UserController.update);
 app.post("/user/delete",verifyToken,UserController.delete);
 app.post("/user/login", UserController.login);
 
-//posts
+//posts routes
 app.post("/posts/create",verifyToken,PostController.create);
 app.get("/posts",verifyToken,PostController.getPosts);
+app.post("/posts/delete",verifyToken,PostController.deletePosts);
+app.put("/posts/update",verifyToken,PostController.updatePosts);
+
+
+
 
 server.listen(3000, () => {
   console.log("server listening on port 3000");

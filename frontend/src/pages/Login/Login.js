@@ -6,18 +6,13 @@ import { UserAction } from "../../action/user.action";
 import { useHistory } from "react-router-dom";
 import "./style.css";
 import Header from '../../component/Header/header'
-import axios from 'axios'
-import { useEffect, useState } from "react";
 
 const Login = () => {
-  const history = useHistory();
+  const history = useHistory(); // for get previous state
   const dispatch = useDispatch();
 
   const onFinish = async (e) => {
     const res = dispatch(await UserAction.login(e));
-    console.log('====================================');
-    console.log('res------',res);
-    console.log('====================================');
     if(res.payload.error){
       message.error(res.payload.error)
     }
@@ -25,9 +20,9 @@ const Login = () => {
       message.success('User Login Successfully')
     }
     if(res.payload.token){
-      localStorage.setItem("token",  res.payload.token);
+      localStorage.setItem("token",  res.payload.token); // set token info in local storage
     }
-    localStorage.setItem("user", JSON.stringify(res && res.payload && res.payload.user ? res.payload.user:{}));
+    localStorage.setItem("user", JSON.stringify(res && res.payload && res.payload.user ? res.payload.user:{}));  // set user info in local storage
     history.push("/addposts");
   };
 
@@ -64,11 +59,6 @@ const Login = () => {
             placeholder="Password"
           />
         </Form.Item>
-        {/* <Form.Item>
-          <a className="login-form-forgot" href="">
-            Forgot password
-          </a>
-        </Form.Item> */}
 
         <Form.Item>
           <Button
@@ -78,7 +68,6 @@ const Login = () => {
           >
             Log in
           </Button>
-          {/* Or <a href="">register now!</a> */}
         </Form.Item>
       </Form>
     </div>

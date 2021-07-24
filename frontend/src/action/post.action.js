@@ -1,7 +1,7 @@
 import {PostsService} from '../Services/posts.service'
-import {CREATEPOST,GETPOST} from '../action/type'
+import {CREATEPOST,GETPOST,DELETEPOST,UPDATEPOST} from '../action/type'
 
-
+// create action for particular operation
 const createPost = (data) => {
    return PostsService.create(data).then((post)=>{
        return {
@@ -14,11 +14,31 @@ const getPosts = () => {
     return PostsService.getPosts().then((posts)=>{
         return {
             type:GETPOST,
-            posts
+            posts:posts.data
+        }
+    })
+ }
+
+ const deletePosts = (id) => {
+    return PostsService.deletePosts(id).then((posts)=>{
+        return {
+            type:DELETEPOST,
+            posts:posts.data
+        }
+    })
+ }
+
+ const updatePost = (data) => {
+    return PostsService.updatePost(data).then((post)=>{
+        return {
+            type:UPDATEPOST,
+            posts:post.data
         }
     })
  }
 export const PostAction = {
     createPost,
-    getPosts
+    getPosts,
+    deletePosts,
+    updatePost
 }
