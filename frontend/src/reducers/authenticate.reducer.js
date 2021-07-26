@@ -6,12 +6,12 @@ const authentication = (state = intialState, action) => {
     case "REGISTER":
       return { isRegistered: true };
     case "LOGIN":
-      return { loggingIn: true, user:action.payload.user };
+      return { loggingIn: true, user: action.payload.user };
     case "ERROR":
-      return {loggingIn: false}
+      return { loggingIn: false };
     default:
-        return state
+      return state;
   }
 };
 
-export default authentication
+export default authentication;

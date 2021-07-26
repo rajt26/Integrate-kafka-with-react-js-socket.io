@@ -8,32 +8,23 @@ module.exports = {
     async create(req, res) {
         try {
             let params = req.body;
-            const match = new RegExp("(0/91)?[7-9][0-9]{9}");
-            if (
-                params.password &&
-                params.confirmPassword &&
-                params.password != params.confirmPassword
-            ) {
-                return res
-                    .status(401)
-                    .json({
-                        error: "password and confirm password should not be different!!",
-                    });
-            }
+            // const match = new RegExp("(0/91)?[7-9][0-9]{9}");
+            // if (
+            //     params.password &&
+            //     params.confirmPassword &&
+            //     params.password != params.confirmPassword
+            // ) {
+            //     return res
+            //         .status(401)
+            //         .json({
+            //             error: "password and confirm password should not be different!!",
+            //         });
+            // }
             params.password = Bcrypt.hashSync(params.password, 10);
             let userEmail = await User.findOne({ email: params.email });
             if (userEmail) {
                 return res.status(401).json({ error: "user already exists!!!" });
             }
-
-            // if (params.mobileNo) {
-            //     let mobileNo = await User.findOne({ mobileNo: params.mobileNo });
-            //     if (mobileNo) {
-            //         return res.status(401).json({ error: "user already exists" });
-            //     } else if (params.mobileNo != match) {
-            //         return res.status(401).json({ error: "please enter valid contact" });
-            //     }
-            // }
 
             let user = await User.create(params);
             return res.send(user);

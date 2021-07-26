@@ -1,23 +1,24 @@
-const intialState = []
+const intialState = [];
 
 const posts = (state = intialState, action) => {
-
   switch (action.type) {
     case "GETPOST":
-      return action.posts ;
+      return action.posts;
     case "ADDPOST":
-      return [...state,action.posts]
+      return [...state, action.posts];
     case "DELETEPOST":
-       state = state.filter((item)=>{
-          return item._id !== action.posts._id
-      })
-      return state
+      state = state.filter((item) => {
+        return item._id !== action.posts._id;
+      });
+      return state;
     case "UPDATEPOST":
-        let check = state.map((item) => item._id == action.posts._id?action.posts:item)
-      return check
+      let check = state.map((item) =>
+        item._id == action.posts._id ? action.posts : item,
+      );
+      return check;
     default:
-        return state
+      return state;
   }
 };
 
-export default posts
+export default posts;

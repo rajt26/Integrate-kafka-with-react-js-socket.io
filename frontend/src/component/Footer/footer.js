@@ -4,7 +4,7 @@ const {  Footer } = Layout;
 const FooterComponent = () => {
   return (
     <Layout style={{ minHeight: "0vh"}}>
-      <Footer style={{backgroundColor:"whitesmoke",textAlign:"center"}}> copy rights by raj thakkar</Footer>
+      <Footer style={{backgroundColor:"whitesmoke",textAlign:"center"}}> copy rights</Footer>
     </Layout>
   );
 };

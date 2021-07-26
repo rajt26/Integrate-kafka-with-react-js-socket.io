@@ -1,4 +1,4 @@
-import { PageHeader,Select,Button } from "antd";
+import { PageHeader,Select } from "antd";
 import { useHistory } from "react-router-dom";
 import './style.css'
 const user = JSON.parse(localStorage.getItem("user"));
@@ -9,19 +9,23 @@ const Header = () => {
   const logout =  () => {
      localStorage.removeItem("user");
      localStorage.removeItem("token");
-    history.push("/login");
+     history.push("/login");
   };
   return (
+    <>
     <PageHeader
       className="site-page-header"
       title="React Feed App"
-      subTitle="React Feed App"
+      // subTitle="React Feed App"
+      style={{backgroundColor:"#3b5998",color:"#FFFFFF"}}
       extra={[
-        user && user.name && <Select defaultValue={user.name} style={{ width: 120 }} bordered={false} onChange={logout}>
+        user && user.name && <Select defaultValue={user.name} style={{ width: 120 ,color:"white"}} bordered={false} onChange={logout}>
            <Option>Logout</Option>
       </Select>
       ]}
-    />
+      />
+      <br></br>
+      </>
   );
 };
 

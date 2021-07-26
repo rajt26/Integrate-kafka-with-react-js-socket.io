@@ -1,38 +1,37 @@
 import { useHistory } from "react-router-dom";
-import { useEffect} from "react";
-import { Form, Input, Button,Modal, message} from "antd";
+import { useEffect } from "react";
+import { Form, Input, Button, Modal, message } from "antd";
 import { useState } from "react";
-import {useSelector} from "react-redux"
-import Header from '../../component/Header/header'
+import { useSelector } from "react-redux";
+import Header from "../../component/Header/header";
 import { PostsService } from "../../Services/posts.service";
-import FooterComponent from '../../component/Footer/footer'
+import FooterComponent from "../../component/Footer/footer";
 import "antd/dist/antd.css";
 
 const AddPosts = () => {
   const history = useHistory();
-  const userDetail = useSelector(state => state.authentication.user);
+  const userDetail = useSelector((state) => state.authentication.user);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [user, setUser] = useState(userDetail);
-  let getToken
+  let getToken;
   useEffect(() => {
-     getToken = localStorage.getItem("token");
+    getToken = localStorage.getItem("token");
     if (!getToken) {
       history.push("/login");
     }
-  },[]);
+  }, []);
 
-  const onFinish =  async (e) => {
-    // localStorage.setItem('token',getToken)
+  const onFinish = async (e) => {
     const res = await PostsService.create({
       title: e.title,
       description: e.description,
       user: user._id,
-    })
-    if(res.status == 200){
-      message.success('Post add successfully')
+    });
+    if (res.status == 200) {
+      message.success("Post add successfully");
     }
-      history.push("/posts");
+    history.push("/posts");
   };
 
   const showPosts = () => {
@@ -58,7 +57,7 @@ const AddPosts = () => {
   };
   return (
     <>
-    <Header/>
+      <Header />
       <h1 style={{ marginLeft: 450 }}>Add Post</h1>
       <Form
         {...formItemLayout}
@@ -66,20 +65,26 @@ const AddPosts = () => {
         className="add_post"
         onFinish={onFinish}
       >
-        <Form.Item name="title" label="Title"  rules={[
+        <Form.Item
+          name="title"
+          label="Title"
+          rules={[
             {
               required: true,
               message: "Please input your title!",
             },
-          ]} >
+          ]}
+        >
           <Input
             placeholder="title"
             style={{ width: 450 }}
             onChange={(e) => setTitle(e.target.value)}
           />
         </Form.Item>
-        <Form.Item name="description" label="Description"
-           rules={[
+        <Form.Item
+          name="description"
+          label="Description"
+          rules={[
             {
               required: true,
               message: "Please input your description!",
@@ -93,14 +98,16 @@ const AddPosts = () => {
           />
         </Form.Item>
         <Button
-          style={{ marginLeft: 500, width: 70 }}
+          style={{ marginLeft: 500, width: 70,backgroundColor:"#3b5998",color:"white" }}
           type="primary"
           htmlType="submit"
           className="addpost-form-button"
         >
           Add
         </Button>
-        <a style={{marginLeft:20}} onClick={showPosts}>Show Posts</a>
+        <a style={{ marginLeft: 20,color:"#3b5998" }} onClick={showPosts}>
+          Show Posts
+        </a>
       </Form>
       {/* <FooterComponent/> */}
     </>

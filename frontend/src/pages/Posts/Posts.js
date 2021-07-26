@@ -1,18 +1,18 @@
 import { useHistory } from "react-router-dom";
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState } from "react";
 import { Card, Button, Modal, Form, Input } from "antd";
 import { PostAction } from "../../action/post.action";
 import { useDispatch, useSelector } from "react-redux";
 import Header from "../../component/Header/header";
 import { uniqBy } from "lodash";
-import FooterComponent from '../../component/Footer/footer'
+// import FooterComponent from "../../component/Footer/footer";
 
 const Posts = () => {
   const history = useHistory();
   let posts = useSelector((state) => state.posts);
   const [visible, setVisible] = useState(false);
-  const [title,setTitle] = useState('');
-  const [description,setDescription] = useState('');
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
   const [id, setPostId] = useState("");
   const [form] = Form.useForm();
   const dispatch = useDispatch();
@@ -38,8 +38,8 @@ const Posts = () => {
 
   const onFinish = async (values) => {
     setVisible(false);
-    setTitle(values.title)
-    setDescription(values.description)
+    setTitle(values.title);
+    setDescription(values.description);
     dispatch(
       await PostAction.updatePost({
         id: id.id,
@@ -61,23 +61,19 @@ const Posts = () => {
   return (
     <>
       <Header />
-      <h3 style={{marginLeft:600}}>Posts</h3>
+      <h3 style={{ marginLeft: 600,color:"#3b5998" }}>Posts</h3>
       {posts.map((post) => (
-        <Card title={post.title} bordered={true} style={{ width: 500,marginLeft:400}}>
+        <>
+        <Card
+          title={post.title}
+          bordered={true}
+          style={{ width: 800, marginLeft: 300 }}
+        >
           <p>{post.description}</p>
           {post.user == user._id && (
             <>
               <Button
-                style={{ width: 70 }}
-                type="danger"
-                htmlType="submit"
-                className="addpost-form-button"
-                onClick={() => onDelete(post._id)}
-              >
-                Delete
-              </Button>
-              <Button
-                style={{ width: 70,marginLeft:10 }}
+                style={{ width: 70, marginLeft: 10,backgroundColor:"#3b5998"}}
                 type="primary"
                 htmlType="submit"
                 className="addpost-form-button"
@@ -85,9 +81,20 @@ const Posts = () => {
               >
                 Update
               </Button>
+              <Button
+                style={{ width: 70,marginLeft:10,backgroundColor:"#3b5998"}}
+                type="danger"
+                htmlType="submit"
+                className="addpost-form-button"
+                onClick={() => onDelete(post._id)}
+              >
+                Delete
+              </Button>
             </>
           )}
-        </Card>
+          </Card>
+      <br></br>
+      </>
       ))}
       <Modal
         title="Update Detail"
@@ -105,13 +112,15 @@ const Posts = () => {
             <Input style={{ width: 450 }} />
           </Form.Item>
 
-          <Form.Item name="description" label="Description" >
+          <Form.Item name="description" label="Description">
             <Input style={{ width: 450 }} />
           </Form.Item>
         </Form>
       </Modal>
-      <a style = {{marginLeft:600}} className="logout" onClick={logout}>Logout</a>
-      <FooterComponent/>
+      {/* <a style={{ marginLeft: 600 }} className="logout" onClick={logout}>
+        Logout
+      </a> */}
+      {/* <FooterComponent /> */}
     </>
   );
 };
