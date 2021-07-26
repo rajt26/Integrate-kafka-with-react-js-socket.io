@@ -11,7 +11,7 @@ const getPosts = async () => {
    return http.get('/posts',{ headers: {"Authorization" : `${token}`} })
 }
 
-const deletePosts = async (id) => {
+const deletePost = async (id) => {
     let token =  localStorage.getItem('token')
    return http.post('/posts/delete',{id},{ headers: {"Authorization" : `${token}`} })
 }
@@ -23,6 +23,6 @@ const updatePost = async (data) => {
 export const PostsService = {
     create,
     getPosts,
-    deletePosts,
+    deletePost,
     updatePost
 }

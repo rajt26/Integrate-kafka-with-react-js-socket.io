@@ -32,9 +32,6 @@ app.get("/posts",verifyToken,PostController.getPosts);
 app.post("/posts/delete",verifyToken,PostController.deletePosts);
 app.put("/posts/update",verifyToken,PostController.updatePosts);
 
-
-
-
 server.listen(3000, () => {
   console.log("server listening on port 3000");
 });

@@ -19,8 +19,8 @@ const getPosts = () => {
     })
  }
 
- const deletePosts = (id) => {
-    return PostsService.deletePosts(id).then((posts)=>{
+ const deletePost = (id) => {
+    return PostsService.deletePost(id).then((posts)=>{
         return {
             type:DELETEPOST,
             posts:posts.data
@@ -39,6 +39,6 @@ const getPosts = () => {
 export const PostAction = {
     createPost,
     getPosts,
-    deletePosts,
+    deletePost,
     updatePost
 }

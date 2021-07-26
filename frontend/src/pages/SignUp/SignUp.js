@@ -49,7 +49,8 @@ const SignUp = () => {
       name="sign_up"
       className="sign_up"
       onFinish={onFinish}
-    >
+      >
+      <h2 style={{marginLeft:150}}>Sign Up</h2>
       <Form.Item
         name="name"
         label="Name"

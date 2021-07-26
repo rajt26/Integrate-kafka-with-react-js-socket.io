@@ -11,6 +11,7 @@ import { useDispatch } from "react-redux";
 function App() {
   const dispatch = useDispatch()
 
+  // recieve socket events
   useEffect(() => {
     socket.on('new_post',(data) => {
       dispatch({type:"ADDPOST",posts:data})

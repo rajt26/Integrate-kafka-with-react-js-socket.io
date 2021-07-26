@@ -5,6 +5,7 @@ import { useState } from "react";
 import {useSelector} from "react-redux"
 import Header from '../../component/Header/header'
 import { PostsService } from "../../Services/posts.service";
+import FooterComponent from '../../component/Footer/footer'
 import "antd/dist/antd.css";
 
 const AddPosts = () => {
@@ -99,8 +100,9 @@ const AddPosts = () => {
         >
           Add
         </Button>
-        <a onClick={showPosts}>Show Posts</a>
+        <a style={{marginLeft:20}} onClick={showPosts}>Show Posts</a>
       </Form>
+      {/* <FooterComponent/> */}
     </>
   );
 };

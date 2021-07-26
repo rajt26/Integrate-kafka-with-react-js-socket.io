@@ -1,4 +1,4 @@
-import { Form, Input, Button, Checkbox,message } from "antd";
+import { Form, Input, Button,message } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { useDispatch } from "react-redux";
 import "antd/dist/antd.css";
@@ -20,7 +20,7 @@ const Login = () => {
       message.success('User Login Successfully')
     }
     if(res.payload.token){
-      localStorage.setItem("token",  res.payload.token); // set token info in local storage
+      localStorage.setItem("token",  res.payload.token); // set token in local storage
     }
     localStorage.setItem("user", JSON.stringify(res && res.payload && res.payload.user ? res.payload.user:{}));  // set user info in local storage
     history.push("/addposts");
@@ -30,6 +30,7 @@ const Login = () => {
     <div className="Login">
       <Header/>
       <Form name="normal_login" className="login-form" onFinish={onFinish}>
+        <h2 style={{marginBottom:20,marginLeft:80}}>Login</h2>
         <Form.Item
           name="username"
           rules={[

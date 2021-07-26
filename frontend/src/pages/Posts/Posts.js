@@ -5,13 +5,15 @@ import { PostAction } from "../../action/post.action";
 import { useDispatch, useSelector } from "react-redux";
 import Header from "../../component/Header/header";
 import { uniqBy } from "lodash";
+import FooterComponent from '../../component/Footer/footer'
 
 const Posts = () => {
   const history = useHistory();
   let posts = useSelector((state) => state.posts);
   const [visible, setVisible] = useState(false);
+  const [title,setTitle] = useState('');
+  const [description,setDescription] = useState('');
   const [id, setPostId] = useState("");
-  const [flag, setFlag] = useState(false);
   const [form] = Form.useForm();
   const dispatch = useDispatch();
   posts = uniqBy(posts, "_id");
@@ -27,7 +29,7 @@ const Posts = () => {
   }, []);
 
   const onDelete = async (id) => {
-    dispatch(await PostAction.deletePosts(id));
+    dispatch(await PostAction.deletePost(id));
   };
 
   const openModal = async () => {
@@ -36,6 +38,8 @@ const Posts = () => {
 
   const onFinish = async (values) => {
     setVisible(false);
+    setTitle(values.title)
+    setDescription(values.description)
     dispatch(
       await PostAction.updatePost({
         id: id.id,
@@ -57,11 +61,10 @@ const Posts = () => {
   return (
     <>
       <Header />
-      <h1>User Posts</h1>
+      <h3 style={{marginLeft:600}}>Posts</h3>
       {posts.map((post) => (
-        <Card title={post.title} bordered={true} style={{ width: 1300 }}>
+        <Card title={post.title} bordered={true} style={{ width: 500,marginLeft:400}}>
           <p>{post.description}</p>
-
           {post.user == user._id && (
             <>
               <Button
@@ -74,7 +77,7 @@ const Posts = () => {
                 Delete
               </Button>
               <Button
-                style={{ width: 70 }}
+                style={{ width: 70,marginLeft:10 }}
                 type="primary"
                 htmlType="submit"
                 className="addpost-form-button"
@@ -102,12 +105,13 @@ const Posts = () => {
             <Input style={{ width: 450 }} />
           </Form.Item>
 
-          <Form.Item name="description" label="Description">
+          <Form.Item name="description" label="Description" >
             <Input style={{ width: 450 }} />
           </Form.Item>
         </Form>
       </Modal>
-      <a onClick={logout}>Logout</a>
+      <a style = {{marginLeft:600}} className="logout" onClick={logout}>Logout</a>
+      <FooterComponent/>
     </>
   );
 };
